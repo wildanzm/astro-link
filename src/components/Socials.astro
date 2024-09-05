@@ -1,0 +1,47 @@
+---
+
+enum Type {
+	linkedIn = 'LinkedIn',
+	gitHub = 'GitHub',
+	portfolio = 'Portfolio'
+}
+
+const socials = [
+	{
+		name: Type.portfolio,
+		url: 'https://wildanzm.vercel.app/',
+		icon: 'assets/svg/icons/website.svg',
+		color: 'bg-lime-500',
+	},
+	{
+		name: Type.gitHub,
+		url: 'https://github.com/wildanzm',
+		icon: 'assets/svg/icons/github.svg',
+		color: 'bg-cyan-500',
+	},
+	{
+		name: Type.linkedIn,
+		url: 'https://www.linkedin.com/in/wildanzm',
+		icon: 'assets/svg/icons/linkedin.svg',
+		color: 'bg-sky-700',
+	}
+];
+
+const getColor = (type: Type) => socials.find((social) => social.name === type)?.color;
+const getClass = (type: Type) =>
+	`scale-100 rounded-full border-2 border-gray-950 ${getColor(
+		type,
+	)} transition duration-300 hover:scale-110 animate-zoom-in`;
+---
+
+<div class="grid grid-cols-3 gap-3 md:grid-flow-col md:gap-2 duration-500">
+	{
+		socials.map((social) => {
+			return (
+				<a aria-label={social.name} class={getClass(social.name)} href={social.url} target="_blank" rel="nofollow noopner">
+					<img class="size-14 p-3 md:size-16" src={social.icon} alt={social.name} />
+				</a>
+			);
+		})
+	}
+</div>
